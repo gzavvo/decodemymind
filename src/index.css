@@ -1,0 +1,92 @@
+:root {
+  --black: #444;
+  --white: white;
+  --dark-grey: #828282;
+  --light-grey: #E0E0E0;
+  --red: #EB5757;
+  --green: #27AE60;
+  --yellow: #F2C94C;
+  --blue: #2D9CDB;
+}
+
+#root * {
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.gameboard {
+  width: 400px;
+  margin: 10px;
+
+  border: 2px solid var(--black);
+  border-radius: 5px;
+
+  display: grid;
+}
+
+.turns,
+.secret-code {
+  padding: 10px;
+  display: grid;
+  grid-gap: 10px;
+  grid-auto-rows: auto;
+}
+
+.rack {
+  padding: 5px;
+  border: 2px solid var(--black);
+  border-radius: 5px;
+  
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  grid-gap: 5px;
+}
+
+.rack > div {
+  border: 2px solid var(--black);
+  border-radius: 5px;
+}
+
+.rack.empty > div {
+  border-color: var(--light-grey);
+}
+
+.code-pegs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.end-turn {
+}
+
+.key-pegs {
+}
+
+.peg {
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+.peg.R {
+  background: var(--red);
+}
+
+.peg.G {
+  background: var(--green);
+}
+
+.peg.B {
+  background: var(--blue);
+}
+
+.peg.Y {
+  background: var(--yellow);
+}
