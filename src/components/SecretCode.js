@@ -1,11 +1,11 @@
-const Code = ({ code }) => {
+const SecretCode = ({ secretCode }) => {
   return (
     <div className="secret-code">
       <div className="rack">
         <div className="code-pegs">
-          {code.map(pegColor => {
+          {secretCode.map((pegColor, index) => {
             return (
-              <div className={`peg ${pegColor}`}>
+              <div key={index} className={`peg ${pegColor}`}>
               </div>
             )
             })
@@ -20,4 +20,4 @@ const Code = ({ code }) => {
   )
 }
 
-export default Code
+export default SecretCode

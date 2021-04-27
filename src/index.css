@@ -14,16 +14,13 @@
 }
 
 .App {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   display: grid;
   place-items: center;
 }
 
 .gameboard {
-  width: 400px;
-  margin: 10px;
-
   border: 2px solid var(--black);
   border-radius: 5px;
 
@@ -34,18 +31,23 @@
 .secret-code {
   padding: 10px;
   display: grid;
-  grid-gap: 10px;
   grid-auto-rows: auto;
 }
 
 .rack {
   padding: 5px;
-  border: 2px solid var(--black);
+
+  border: 2px solid var(--white);
   border-radius: 5px;
   
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
-  grid-gap: 5px;
+  grid-template-columns: 208px 54px 54px;
+  grid-template-rows: 54px;
+  grid-gap: 12px;
+}
+
+.rack.playing {
+  border-color: var(--black);
 }
 
 .rack > div {
@@ -59,19 +61,11 @@
 
 .code-pegs {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-.end-turn {
-}
-
-.key-pegs {
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .peg {
-  height: 40px;
-  width: 40px;
-  margin: 5px;
+  margin: 8px;
   border-radius: 50%;
 }
 
@@ -89,4 +83,88 @@
 
 .peg.Y {
   background: var(--yellow);
+}
+
+.rack.playing .peg.x {
+  background: var(--light-grey);
+}
+
+.end-turn {
+  display: grid;
+  place-items: center;
+
+  font-size: x-large;
+  font-weight: bold;
+  color: var(--black);
+}
+
+.key-pegs {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+.key-pegs > div {
+  margin: 5px;
+  background-color: var(--light-grey);
+  border-radius: 50%;
+}
+
+.key-pegs > div.b {
+  background-color: var(--black);
+  border: 2px solid var(--black);
+}
+
+.key-pegs > div.w {
+  background-color: var(--white);
+  border: 2px solid var(--black);
+}
+
+.button.primary {
+  background: var(--white);
+  color: var(--black);
+  border: 2px solid var(--black);
+  border-radius: 5px;
+  padding: 12px 18px;
+
+  font-family: serif;
+  font-size: x-large;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.button.primary:hover {
+  background: var(--light-grey);
+}
+
+.modal {
+  display: grid;
+  position: absolute;
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.modal > h3 {
+  text-align: center;
+  padding: 10px;
+
+}
+
+.modal.code-pegs {
+  width: 215px;
+  height: 54px;
+}
+
+.modal:before {
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+  bottom: 56px;
+  left: 87px;
+  border: 20px solid transparent;
+  border-bottom-color: var(--black);
 }

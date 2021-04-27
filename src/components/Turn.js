@@ -2,9 +2,9 @@ import CodePegs from './CodePegs'
 import EndTurn from './EndTurn'
 import KeyPegs from './KeyPegs'
 
-const Turn = ({ code }) => {
+const PlayedTurn = ({ codePegs, keyPegs }) => {
 
-  if (code === null) {
+  if (codePegs === null) {
     return (
       <div className="rack empty">
         <CodePegs code={['x','x','x','x']} />
@@ -15,11 +15,11 @@ const Turn = ({ code }) => {
   }
   return (
     <div className="turn rack">
-      <CodePegs code={code}/>
+      <CodePegs code={codePegs}/>
       <EndTurn />
-      <KeyPegs />
+      <KeyPegs keyPegs={null}/>
     </div>
   )
 }
 
-export default Turn
+export default PlayedTurn

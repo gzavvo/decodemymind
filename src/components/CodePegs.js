@@ -1,10 +1,16 @@
-const CodePegs = ({ code }) => {
+import Peg from './Peg'
+
+const CodePegs = ({ code, updateCode }) => {
   return (
     <div className="code-pegs">
-      {code.map(pegColor => {
+      {code.map((pegColor, index) => {
         return (
-          <div className={`peg ${pegColor}`}>
-          </div>
+          <Peg 
+            key={index} 
+            pegIndex={index}
+            color={pegColor} 
+            updateCode={updateCode}
+          />
         )
         })
       }

@@ -1,7 +1,11 @@
-const EndTurn = () => {
+const EndTurn = ({ evaluateCode }) => {
   return (
-    <div className="end-turn">
-    </div>
+    <button 
+      className="end-turn"
+      onClick={evaluateCode}
+    >
+      OK
+    </button>
   )
 }
 
