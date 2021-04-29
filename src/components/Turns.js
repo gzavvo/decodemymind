@@ -2,7 +2,7 @@ import PlayedTurn from './PlayedTurn'
 import PlayingTurn from './PlayingTurn'
 import EmptyTurn from './EmptyTurn'
 
-const Turns = ({ turnsHistory, secretCode, updateTurnsHistory }) => {
+const Turns = ({ turnsHistory, secretCode, updateTurnsHistory, turnNumber, endGame }) => {
 
   return (
     <div className="turns">
@@ -14,6 +14,8 @@ const Turns = ({ turnsHistory, secretCode, updateTurnsHistory }) => {
                 key={Math.floor(Math.random() * 1000000)} 
                 secretCode={secretCode}
                 updateTurnsHistory={updateTurnsHistory}
+                turnNumber={turnNumber}
+                endGame={endGame}
               />
             )
           } else if (!turn.codePegs) {

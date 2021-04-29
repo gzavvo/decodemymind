@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Turns from './Turns'
 import SecretCode from './SecretCode'
 
@@ -8,6 +8,7 @@ const Gameboard = () => {
   const [secretCode, setSecretCode] = useState(null)
   const [turnsHistory, setTurnsHistory] = useState(null)
   const [turnNumber, setTurnNumber] = useState(null)
+  const [isSecretCodeVisible, setIsSecretCodeVisible] = useState(false)
 
   const generateSecretCode = () => {
     const code = []
@@ -33,15 +34,12 @@ const Gameboard = () => {
 
   const updateTurnsHistory = (newCodePegs, newKeyPegs) => {
     const newTurnsHistory = [...turnsHistory]
-    console.log('update new turns history')
     newTurnsHistory[turnNumber].codePegs = newCodePegs
     newTurnsHistory[turnNumber].keyPegs = newKeyPegs
     newTurnsHistory[turnNumber].isPlaying = false
     newTurnsHistory[turnNumber + 1].isPlaying = true
-    console.log(newTurnsHistory)
     setTurnsHistory(newTurnsHistory)
     setTurnNumber(turnNumber + 1)
-    console.log(turnsHistory)
   }
 
   const startGame = () => {
@@ -49,6 +47,15 @@ const Gameboard = () => {
     setTurnsHistory(gerenerateEmptyTurnsHistory())
     setSecretCode(generateSecretCode())
     setTurnNumber(0)
+  }
+  
+  const endGame = (isWin) => {
+    setIsSecretCodeVisible(true)
+    if (isWin) {
+      window.alert('You win')
+    } else {
+      window.alert('You lose')
+    }
   }
 
   if (!isGameStarted) {
@@ -64,8 +71,13 @@ const Gameboard = () => {
         turnsHistory={turnsHistory}
         secretCode={secretCode}
         updateTurnsHistory={updateTurnsHistory}
+        turnNumber={turnNumber}
+        endGame={endGame}
       />
-      <SecretCode secretCode={secretCode}/>
+      <SecretCode 
+        secretCode={secretCode}
+        isSecretCodeVisible={isSecretCodeVisible}
+      />
     </div>
   )
 }

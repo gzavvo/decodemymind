@@ -1,8 +1,8 @@
-const EndTurn = ({ evaluateCode }) => {
+const EndTurn = ({ endTurn }) => {
   return (
     <button 
       className="end-turn"
-      onClick={evaluateCode}
+      onClick={endTurn}
     >
       OK
     </button>

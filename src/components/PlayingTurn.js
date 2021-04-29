@@ -3,21 +3,33 @@ import CodePegs from './CodePegs'
 import EndTurn from './EndTurn'
 import KeyPegs from './KeyPegs'
 
-const PlayingTurn = ({ secretCode, updateTurnsHistory, changeTurn }) => {
+const PlayingTurn = ({ secretCode, updateTurnsHistory, changeTurn, turnNumber, endGame }) => {
   const [code, setCode] = useState(['x', 'x', 'x', 'x']) 
 
   const updateCode = (index, color) => {
     let newCode = [...code]
-    //console.log('-- copy-code: ', newCode)
     newCode[index] = color
-    //console.log('-- updatedCode', newCode)
     setCode(newCode)
   }
 
-  const evaluateCode = () => {
-    console.log("evaluating code")
-    console.log("-- secret-code:", secretCode)
-    console.log("-- code:", code)
+  const areArraysEqual = (arr1, arr2) => {
+    return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index])
+  }
+
+  const endTurn = () => {
+    console.log('code: ', code)
+    console.log('secretCode: ', secretCode)
+    console.log(areArraysEqual(code, secretCode))
+    if (areArraysEqual(code, secretCode)) {
+      endGame(true)
+    } else if (turnNumber === 11) {
+      endGame(false)
+    } else {
+      getCodemakerFeedback()
+    }
+  }
+
+  const getCodemakerFeedback = () => {
     let keyPegs = []
     let codeTemp = [...code]
     let secretCodeTemp = [...secretCode]
@@ -39,10 +51,7 @@ const PlayingTurn = ({ secretCode, updateTurnsHistory, changeTurn }) => {
         }
       }
     }
-
-    console.log('-- keyPegs after eval: ', keyPegs)
     updateTurnsHistory(code, keyPegs)
-    console.log('history updated')
   }
 
   return (
@@ -51,7 +60,7 @@ const PlayingTurn = ({ secretCode, updateTurnsHistory, changeTurn }) => {
         code={code} 
         updateCode={updateCode}
       />
-      <EndTurn evaluateCode={evaluateCode}/>
+      <EndTurn endTurn={endTurn}/>
       <KeyPegs keyPegs={null}/>
     </div>
   )

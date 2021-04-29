@@ -85,8 +85,13 @@
   background: var(--yellow);
 }
 
-.rack.playing .peg.x {
+.rack.playing .peg.x,
+.secret-code .peg.x {
   background: var(--light-grey);
+  font-family: monospace;
+  font-size: x-large;
+  display: grid;
+  place-items: center;
 }
 
 .end-turn {
