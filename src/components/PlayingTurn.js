@@ -20,12 +20,11 @@ const PlayingTurn = ({ secretCode, updateTurnsHistory, changeTurn, turnNumber, e
     console.log('code: ', code)
     console.log('secretCode: ', secretCode)
     console.log(areArraysEqual(code, secretCode))
+    getCodemakerFeedback()
     if (areArraysEqual(code, secretCode)) {
       endGame(true)
     } else if (turnNumber === 11) {
       endGame(false)
-    } else {
-      getCodemakerFeedback()
     }
   }
 

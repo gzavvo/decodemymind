@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Turns from './Turns'
 import SecretCode from './SecretCode'
+import EndGameBox from './EndGameBox'
+import useModal from '../useModal'
 
 const Gameboard = () => {
   const pegs = ['R', 'G', 'B', 'Y']
@@ -9,6 +11,7 @@ const Gameboard = () => {
   const [turnsHistory, setTurnsHistory] = useState(null)
   const [turnNumber, setTurnNumber] = useState(null)
   const [isSecretCodeVisible, setIsSecretCodeVisible] = useState(false)
+  const {toggle, visible} = useModal()
 
   const generateSecretCode = () => {
     const code = []
@@ -37,12 +40,18 @@ const Gameboard = () => {
     newTurnsHistory[turnNumber].codePegs = newCodePegs
     newTurnsHistory[turnNumber].keyPegs = newKeyPegs
     newTurnsHistory[turnNumber].isPlaying = false
-    newTurnsHistory[turnNumber + 1].isPlaying = true
+    if (turnNumber < 11) {
+      newTurnsHistory[turnNumber + 1].isPlaying = true
+    }
     setTurnsHistory(newTurnsHistory)
     setTurnNumber(turnNumber + 1)
   }
 
   const startGame = () => {
+    if (visible) {
+      toggle()
+    }
+    setIsSecretCodeVisible(false)
     setIsGameStarted(true)
     setTurnsHistory(gerenerateEmptyTurnsHistory())
     setSecretCode(generateSecretCode())
@@ -52,9 +61,9 @@ const Gameboard = () => {
   const endGame = (isWin) => {
     setIsSecretCodeVisible(true)
     if (isWin) {
-      window.alert('You win')
+      toggle()
     } else {
-      window.alert('You lose')
+      toggle()
     }
   }
 
@@ -77,6 +86,11 @@ const Gameboard = () => {
       <SecretCode 
         secretCode={secretCode}
         isSecretCodeVisible={isSecretCodeVisible}
+      />
+      <EndGameBox
+        visible={visible}
+        toggle={toggle}
+        startGame={startGame}
       />
     </div>
   )
