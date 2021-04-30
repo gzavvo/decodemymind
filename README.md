@@ -6,3 +6,7 @@
 It's made with React.js.
 
 You can try it [here](https://stoic-keller-7086c7.netlify.app/).
+
+## Screenshots
+
+![screenshot of Decode My Mind app](./screenshots/ingame.png)
