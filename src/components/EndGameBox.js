@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const EndGameBox = ({ visible, toggle, startGame }) => {
+const EndGameBox = ({ visible, toggle, startGame, endGameMessage }) => {
   if (!visible) {
     return null
   }
@@ -9,8 +9,8 @@ const EndGameBox = ({ visible, toggle, startGame }) => {
   return ReactDOM.createPortal(
     <div className='overlay'>
       <div className='modal end-game'>
-        <h3>End Game</h3>
-        <button onClick={startGame}>Start new game</button>
+        <h3>{endGameMessage}</h3>
+        <button className='button primary' onClick={startGame}>Start new game</button>
       </div>
     </div>, document.body
   )

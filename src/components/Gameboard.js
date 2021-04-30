@@ -11,6 +11,7 @@ const Gameboard = () => {
   const [turnsHistory, setTurnsHistory] = useState(null)
   const [turnNumber, setTurnNumber] = useState(null)
   const [isSecretCodeVisible, setIsSecretCodeVisible] = useState(false)
+  const [endGameMessage, setEndGameMessage] = useState('')
   const {toggle, visible} = useModal()
 
   const generateSecretCode = () => {
@@ -52,6 +53,7 @@ const Gameboard = () => {
       toggle()
     }
     setIsSecretCodeVisible(false)
+    setEndGameMessage('')
     setIsGameStarted(true)
     setTurnsHistory(gerenerateEmptyTurnsHistory())
     setSecretCode(generateSecretCode())
@@ -61,8 +63,10 @@ const Gameboard = () => {
   const endGame = (isWin) => {
     setIsSecretCodeVisible(true)
     if (isWin) {
+      setEndGameMessage('You win!')
       toggle()
     } else {
+      setEndGameMessage('You loose!')
       toggle()
     }
   }
@@ -91,6 +95,7 @@ const Gameboard = () => {
         visible={visible}
         toggle={toggle}
         startGame={startGame}
+        endGameMessage={endGameMessage}
       />
     </div>
   )
